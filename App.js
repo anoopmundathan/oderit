@@ -16,12 +16,12 @@ const Hello = () => <View><Text>Hello</Text></View>
 const About = () => <View><Text>About</Text></View>
 
 const MainNavigator = TabNavigator({
-  auth: {
-    screen: AuthScreen
-  },
   welcome: {
     screen: WelcomeScreen
   }, 
+  auth: {
+    screen: AuthScreen
+  },
   settings: {
     screen: TabNavigator({
       Hello: {
@@ -31,6 +31,11 @@ const MainNavigator = TabNavigator({
         screen: About
       }
     })
+  }
+}, {
+  lazy: true,
+  navigationOptions: {
+    tabBarVisible: false
   }
 })
 

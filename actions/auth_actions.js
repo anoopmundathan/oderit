@@ -1,4 +1,4 @@
-import { FB_LOGIN_SUCCESS } from './types'
+import { FB_LOGIN_SUCCESS, FB_LOGIN_FAIL } from './types'
 import { AsyncStorage } from 'react-native'
 import { Facebook } from 'expo'
 
