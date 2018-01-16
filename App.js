@@ -35,7 +35,7 @@ const MainNavigator = TabNavigator({
 }, {
   lazy: true,
   navigationOptions: {
-    tabBarVisible: false
+    tabBarVisible: true
   }
 })
 
