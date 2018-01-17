@@ -5,14 +5,20 @@ import Slides from '../components/Slides'
 const SLIDE_DATA = [
   { title: 'Welcome to oderIt', color: '#03A9F4' },
   { title: 'Your local grocery app', color: '#009688' }, 
-  { title: 'Set your location and order item', color: '#03A9F4' }
+  { title: 'Set location and order', color: '#03A9F4' }
 ]
 
 class WelcomeScreen extends Component {
+
+  onSlideComplete = () => {
+    this.props.navigation.navigate('auth')
+  }
+
   render() {
     return(
       <Slides 
-        data={SLIDE_DATA} />
+        data={SLIDE_DATA} 
+        onSlideComplete={this.onSlideComplete} />
     )
   }
 }

@@ -1,9 +1,26 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native'
+import { Button } from 'react-native-elements'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
 class Slides extends Component {
+
+  // Render button only in last slide
+  renderButton(index) {
+    if(index === this.props.data.length - 1) {
+      return(
+        <Button
+          raised
+          textStyle={{textAlign: 'center'}}
+          title="Let's go"
+          buttonStyle={styles.button} 
+          onPress={this.props.onSlideComplete}
+          />
+      )
+    }
+  }
+
   renderSlides() {
     return this.props.data.map((slide, index) => {
       return(
@@ -11,6 +28,7 @@ class Slides extends Component {
           key={index}
           style={[styles.slide, {backgroundColor: slide.color}]}>
           <Text style={styles.slideText}>{slide.title}</Text>
+          {this.renderButton(index)}
         </View>
       )
     })
@@ -39,5 +57,9 @@ const styles = StyleSheet.create({
   slideText: {
     fontSize: 35,
     color: '#fff'
+  },
+  button: {
+    backgroundColor: '#0288D1',
+    marginTop: 15
   }
 })

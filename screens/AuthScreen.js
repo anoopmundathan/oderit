@@ -6,19 +6,18 @@ import * as actions from '../actions'
 class AuthScreen extends Component {
   
   componentDidMount() {
-    this.props.faceBookLogin()
-    AsyncStorage.removeItem('fb_token')
+    // this.props.faceBookLogin()
+    // AsyncStorage.removeItem('fb_token')
   }
 
   render() {
     return(
       <View>
-        <Text>MapScreen</Text>
-        <Text>MapScreen</Text>
-        <Text>MapScreen</Text>
-        <Text>MapScreen</Text>
-        <Text>MapScreen</Text>
-        <Text>MapScreen</Text>
+        <Text>Auth Screen</Text>
+        <Text>Auth Screen</Text>
+        <Text>Auth Screen</Text>
+        <Text>Auth Screen</Text>
+        <Text>Auth Screen</Text>
       </View>
     )
   }
