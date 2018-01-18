@@ -1,58 +1,31 @@
-import React from 'react';
-import { 
-  Image, 
-  Text, 
-  View,
-  StyleSheet } from 'react-native'
-
-import { Provider } from 'react-redux'
-import store from './store'
-
+import React, { Component } from 'react'
+import { Text, View, StyleSheet } from 'react-native'
 import { TabNavigator } from 'react-navigation'
-import AuthScreen from './screens/AuthScreen'
-import WelcomeScreen from './screens/WelcomeScreen'
-
-const Hello = () => <View><Text>Hello</Text></View>
-const About = () => <View><Text>About</Text></View>
+import { MapView } from 'expo'
+import MapScreen from './components/MapScreen'
 
 const MainNavigator = TabNavigator({
-  welcome: {
-    screen: WelcomeScreen
-  }, 
-  auth: {
-    screen: AuthScreen
-  },
-  settings: {
-    screen: TabNavigator({
-      Hello: {
-        screen: Hello
-      },
-      About: {
-        screen: About
-      }
-    })
-  }
-}, {
-  lazy: true,
-  navigationOptions: {
-    tabBarVisible: true
-  }
-})
-
-export default class App extends React.Component {
+  MapScreen: {
+    screen: MapScreen
+  }},
+  {
+    lazy: true,
+    navigationOptions: {
+      tabBarVisible: true
+    }
+  })
+export default class App extends Component {
   render() {
     return(
-      <Provider store={store}>
-        <View style={styles.container}>
-          <MainNavigator />
-        </View>
-      </Provider>
+      <MainNavigator/>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
