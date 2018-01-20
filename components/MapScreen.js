@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { MapView } from 'expo'
-import { View, ActivityIndicator } from 'react-native'
+import { View, ActivityIndicator, StyleSheet } from 'react-native'
+import { Button } from 'react-native-elements'
 
 class MapScreen extends Component {
   state = {
@@ -21,6 +22,11 @@ class MapScreen extends Component {
     this.setState( { region })
   }
 
+  onButtonSearch = () => {
+    // Invoke action creator and fetch stores in that location
+    console.log(this.state.region)
+  }
+
   render() {
     const { mapLoaded, region } = this.state
 
@@ -33,12 +39,31 @@ class MapScreen extends Component {
     }
 
     return(
+      <View style={{ flex: 1 }}>
       <MapView 
         region={this.state.region}
         onRegionChangeComplete={this.onRegionChangeComplete}
         style={{flex: 1}}/>
+      <View style={styles.buttonContainer}>
+        <Button
+          onPress={this.onButtonSearch}
+          title="Search "
+          backgroundColor='#009686'
+          icon={ { name: 'search' }}
+          large/>
+      </View>
+      </View>
     ) 
   }
 }
 
 export default MapScreen
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0
+  }
+})
