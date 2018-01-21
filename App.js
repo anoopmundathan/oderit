@@ -4,12 +4,19 @@ import { TabNavigator } from 'react-navigation'
 import { MapView } from 'expo'
 import MapScreen from './components/MapScreen'
 
+const TestScreen = () => <View><Text>Test</Text></View>
+
 const MainNavigator = TabNavigator({
-  MapScreen: {
+  Map: {
     screen: MapScreen
-  }},
+  },
+  Test: {
+    screen: TestScreen
+  }
+},
   {
     lazy: true,
+    tabBarPosition: 'bottom',
     navigationOptions: {
       tabBarVisible: true
     }
