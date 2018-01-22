@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
+import { red } from '../utils/colors'
+
 
 class Search extends Component {
 
@@ -13,7 +15,7 @@ class Search extends Component {
           title="Search"
           fontSize={20}
           borderRadius={3}
-          backgroundColor={'#e53a40'}
+          backgroundColor={red}
           onPress={() => this.props.onSearch()}
           icon={ { name: 'search' }} />
       </View>
