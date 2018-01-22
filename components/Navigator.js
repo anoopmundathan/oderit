@@ -9,17 +9,25 @@ import { Orders } from './Orders'
 import { Stores } from './Stores'
 
 export const MainNavigator = TabNavigator({
-  Stores: {
+  Main: {
     screen: StackNavigator({
       Map: {
         screen: MapScreen,
-        navigationOptions: { header: null }
+        navigationOptions: { 
+          header: null,
+          headerTitle: 'Home'
+        }
       },
-      Detail: {
-        screen: Stores
+      Stores: {
+        screen: Stores,
+        navigationOptions: {
+          headerTitle: 'Stores',
+          headerTintColor: red
+        }
       }
     }, {
       navigationOptions: {
+        title: 'Stores',
         tabBarIcon: ({ tintColor }) => (
           <MaterialIcons 
             color={tintColor}

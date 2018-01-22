@@ -50,7 +50,7 @@ class MapScreen extends Component {
   }
 
   onSearch = () => {
-    this.props.navigation.navigate('Detail')
+    this.props.navigation.navigate('Stores')
   }
 
   render() {
