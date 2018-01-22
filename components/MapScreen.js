@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Location, Permissions, MapView } from 'expo'
-import { View, ActivityIndicator, StyleSheet } from 'react-native'
-import { Button } from 'react-native-elements'
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
+import { fetchStores } from '../utils/api'
+import Search from './Search'
 
 class MapScreen extends Component {
+
   state = {
     mapLoaded: false,
     region: {
@@ -39,13 +41,7 @@ class MapScreen extends Component {
         longitudeDelta: 0.01050350012498162,
         latitudeDelta: 0.010492913271392013
       },
-      mapLoaded: true,
-      markers: [{
-        latitude, 
-        longitude, 
-        title: 'title', 
-        description: 'description'
-      }]
+      mapLoaded: true
     })
   }
 
@@ -53,9 +49,8 @@ class MapScreen extends Component {
     this.setState( { region })
   }
 
-  onButtonSearch = () => {
-    // Invoke action creator and fetch stores in that location
-    console.log(this.state.region)
+  onSearch = () => {
+    this.props.navigation.navigate('Detail')
   }
 
   render() {
@@ -71,24 +66,11 @@ class MapScreen extends Component {
 
     return(
       <View style={styles.container}>
-      <MapView 
-        region={this.state.region}
-        onRegionChangeComplete={this.onRegionChangeComplete}
-        style={styles.map}/>
-        <MapView.Marker coordinate={{
-          latitude: this.state.markers[0].latitude,
-          longitude: this.state.markers[0].longitude,
-          title: this.state.markers[0].title,
-          description: this.state.markers[0].description
-        }} />
-      <View style={styles.buttonContainer}>
-        <Button
-          onPress={this.onButtonSearch}
-          title="Search"
-          backgroundColor='#009686'
-          icon={ { name: 'search' }}
-          large/>
-      </View>
+        <MapView 
+          region={region}
+          onRegionChangeComplete={this.onRegionChangeComplete}
+          style={styles.map} />
+        <Search onSearch={this.onSearch}/>
       </View>
     ) 
   }
@@ -109,11 +91,5 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-  },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0
   }
 })
