@@ -1,38 +1,16 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import { TabNavigator } from 'react-navigation'
-import { MapView } from 'expo'
-import MapScreen from './components/MapScreen'
+import { View } from 'react-native'
+import { red } from './utils/colors'
+import { MainNavigator } from './components/Navigator'
+import { AppStatusBar } from './components/AppStatusBar'
 
-const TestScreen = () => <View><Text>Test</Text></View>
-
-const MainNavigator = TabNavigator({
-  Map: {
-    screen: MapScreen
-  },
-  Test: {
-    screen: TestScreen
-  }
-},
-  {
-    lazy: true,
-    tabBarPosition: 'bottom',
-    navigationOptions: {
-      tabBarVisible: true
-    }
-  })
 export default class App extends Component {
   render() {
     return(
-      <MainNavigator/>
+      <View style={{ flex: 1 }}>
+        <AppStatusBar backgroundColor={red} barStyle='light-content' />
+        <MainNavigator/>
+      </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
