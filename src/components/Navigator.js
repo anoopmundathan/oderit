@@ -6,7 +6,7 @@ import { gray, red } from '../utils/colors'
 
 import { Settings } from './Settings'
 import { Orders } from './Orders'
-import { Stores } from './Stores'
+import Stores from './Stores'
 
 export const MainNavigator = TabNavigator({
   Main: {
