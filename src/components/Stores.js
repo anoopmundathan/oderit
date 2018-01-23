@@ -11,9 +11,13 @@ class Stores extends Component {
 
   componentDidMount() {
     this.props.getStores()
+      .then(() => {
+        this.setState({ loaded: true })
+      })
   }
 
   render() {
+
     if(!this.state.loaded) {
       return(
         <View style={styles.container}>
@@ -22,18 +26,18 @@ class Stores extends Component {
           </Text>
         </View>
       )
+    } else {
+      return(
+       <View>
+         {this.props.stores.map(store => <Text key={store._id}>{store.storeName}</Text>)}
+       </View>
+      )
     }
-
-    return(
-      <View>
-        <Text>Store</Text>
-      </View>
-    )
   }
 }
 
 
-mapStateToProps = ( { stores }) => ({ stores })
+mapStateToProps = (stores) => ({ stores })
 mapDispatchToProps = (dispatch) => {
   return {
     getStores: () => dispatch(fetchStoresAction())
