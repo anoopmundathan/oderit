@@ -4,12 +4,10 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 import MapScreen from './MapScreen'
 import { gray, red } from '../utils/colors'
 import { View, Text } from 'react-native'
-
 import { Settings } from './Settings'
 import { Orders } from './Orders'
 import Stores from './Stores'
-
-const Items = () => <View><Text>Items</Text></View>
+import Items from './Items'
 
 export const MainNavigator = TabNavigator({
   Main: {
