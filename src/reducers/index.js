@@ -10,7 +10,7 @@ const stores = (state = { }, action) => {
   }
 }
 
-const error = (state = {}, action) => {
+const error = (state = { }, action) => {
   switch(action.type) {
     case FETCH_STORES_ERROR:
       return {

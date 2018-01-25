@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchStoresAction } from '../actions'
+import { SearchBar, List, ListItem } from 'react-native-elements'
+import { Entypo } from '@expo/vector-icons'
 
 class Stores extends Component {
-  
+
   state = {
     loaded: false
   }
@@ -16,8 +18,11 @@ class Stores extends Component {
       })
   }
 
-  render() {
+  renderIcon = () => <Entypo name='shop' color='red' size={100} />
 
+  render() {
+    const { stores } = this.props
+    
     if(!this.state.loaded) {
       return(
         <View style={styles.container}>
@@ -25,21 +30,30 @@ class Stores extends Component {
         </View>
       )
     } else {
-      if(this.props.error) {
-        return(<View><Text>Error</Text></View>)
-      } else {
-        return(
-         <View>
-           {this.props.stores.map(store => <Text key={store._id}>{store.storeName}</Text>)}
-         </View>
-        )
-      }
+      return(
+        <View>
+          <SearchBar 
+            lightTheme
+            placeholder='Search here' />
+            <List containerStyle={{marginTop: 0}}>
+              {stores.map((store, index) => (
+                <ListItem 
+                  leftIcon={this.renderIcon()}
+                  hideChevron
+                  key={index}
+                  title={store.storeName}
+                  subtitle={store.storeName} />
+              ))}
+            </List>
+        </View>
+      )
     }
   }
+
 }
 
 
-mapStateToProps = (stores, error) => ({ stores, error })
+mapStateToProps = (state) => ({ stores: state.stores, error: state.error })
 mapDispatchToProps = (dispatch) => {
   return {
     getStores: () => dispatch(fetchStoresAction())
