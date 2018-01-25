@@ -3,6 +3,7 @@ import { Location, Permissions, MapView } from 'expo'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { fetchStores } from '../utils/api'
 import Search from './Search'
+import Loading from './Loading'
 
 class MapScreen extends Component {
 
@@ -58,9 +59,7 @@ class MapScreen extends Component {
 
     if(!mapLoaded) {
       return(
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <ActivityIndicator size='large' />
-        </View>
+        <Loading />
       )
     }
 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchStoresAction } from '../actions'
 import { SearchBar, List, ListItem } from 'react-native-elements'
 import { Entypo } from '@expo/vector-icons'
 import StoreList from './StoreList'
+import Loading from './Loading'
 
 class Stores extends Component {
 
@@ -40,9 +41,7 @@ class Stores extends Component {
     
     if(!this.state.loaded) {
       return(
-        <View style={styles.container}>
-          <ActivityIndicator />
-        </View>
+        <Loading />
       )
     } else {
       return(
