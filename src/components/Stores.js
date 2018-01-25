@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchStoresAction } from '../actions'
 import { SearchBar, List, ListItem } from 'react-native-elements'
 import { Entypo } from '@expo/vector-icons'
+import StoreList from './StoreList'
 
 class Stores extends Component {
 
@@ -18,7 +19,21 @@ class Stores extends Component {
       })
   }
 
-  renderIcon = () => <Entypo name='shop' color='red' size={100} />
+  renderStore = ({ item }) => (
+    <View style={styles.storeContainer}>
+      <Entypo 
+        name='shop' 
+        color='red' 
+        size={100} />
+      <StoreList 
+        name={item.storeName} 
+        onPress={this.onStorePressed} />
+    </View>
+  )
+
+  onStorePressed = () => {
+    this.props.navigation.navigate('Items')
+  }
 
   render() {
     const { stores } = this.props
@@ -35,16 +50,11 @@ class Stores extends Component {
           <SearchBar 
             lightTheme
             placeholder='Search here' />
-            <List containerStyle={{marginTop: 0}}>
-              {stores.map((store, index) => (
-                <ListItem 
-                  leftIcon={this.renderIcon()}
-                  hideChevron
-                  key={index}
-                  title={store.storeName}
-                  subtitle={store.storeName} />
-              ))}
-            </List>
+            <FlatList 
+              data={stores}
+              keyExtractor={(store, index) => store._id}
+              renderItem={this.renderStore}
+            />
         </View>
       )
     }
@@ -53,13 +63,8 @@ class Stores extends Component {
 }
 
 
-mapStateToProps = (state) => ({ stores: state.stores, error: state.error })
-mapDispatchToProps = (dispatch) => {
-  return {
-    getStores: () => dispatch(fetchStoresAction())
-  }
-}
-
+mapStateToProps = state => ({ stores: state.stores, error: state.error })
+mapDispatchToProps = dispatch => ({ getStores: () => dispatch(fetchStoresAction()) })
 export default connect(mapStateToProps, mapDispatchToProps)(Stores)
 
 const styles = StyleSheet.create({
@@ -67,5 +72,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  }, 
+  storeContainer: {
+    flex: 1,
+    flexDirection: 'row'
   }
 })

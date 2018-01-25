@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { Ionicons, MaterialIcons, Octicons } from '@expo/vector-icons'
+import { Ionicons, MaterialIcons, Octicons, Entypo } from '@expo/vector-icons'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import MapScreen from './MapScreen'
 import { gray, red } from '../utils/colors'
+import { View, Text } from 'react-native'
 
 import { Settings } from './Settings'
 import { Orders } from './Orders'
 import Stores from './Stores'
+
+const Items = () => <View><Text>Items</Text></View>
 
 export const MainNavigator = TabNavigator({
   Main: {
@@ -22,6 +25,13 @@ export const MainNavigator = TabNavigator({
         screen: Stores,
         navigationOptions: {
           headerTitle: 'Stores',
+          headerTintColor: red
+        }
+      },
+      Items: {
+        screen: Items,
+        navigationOptions: {
+          headerTitle: 'Items',
           headerTintColor: red
         }
       }
