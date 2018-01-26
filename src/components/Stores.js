@@ -6,6 +6,7 @@ import { SearchBar, List, ListItem } from 'react-native-elements'
 import { Entypo } from '@expo/vector-icons'
 import StoreList from './StoreList'
 import Loading from './Loading'
+import { red } from '../utils/colors'
 
 class Stores extends Component {
 
@@ -22,13 +23,14 @@ class Stores extends Component {
 
   renderStore = ({ item }) => (
     <View style={styles.storeContainer}>
-      <Entypo 
-        name='shop' 
-        color='red' 
-        size={100} />
-      <StoreList 
-        name={item.storeName} 
-        onPress={this.onStorePressed} />
+      <View style={styles.storeIcon}>
+        <Entypo name='shop' color={red} size={100} />
+      </View>
+      <View style={styles.storeName}>
+        <StoreList 
+          name={item.storeName} 
+          onPress={this.onStorePressed} />
+        </View>
     </View>
   )
 
@@ -74,6 +76,16 @@ const styles = StyleSheet.create({
   }, 
   storeContainer: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderWidth: .5,
+    borderColor: '#bdc6cf'
+  },
+  storeIcon: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  storeName: {
+    flex: 1
   }
 })
