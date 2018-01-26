@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Ionicons, MaterialIcons, Octicons, Entypo } from '@expo/vector-icons'
 import { TabNavigator, StackNavigator } from 'react-navigation'
-import MapScreen from './MapScreen'
 import { gray, red } from '../utils/colors'
 import { View, Text } from 'react-native'
-import { Settings } from './Settings'
-import { Orders } from './Orders'
-import Stores from './Stores'
-import Items from './Items'
+
+import MapScreen from '../screens/MapScreen'
+import Settings from '../screens/Settings'
+import Orders from '../screens/Orders'
+import Stores from '../screens/Stores'
+import Items from '../screens/Items'
 
 export const MainNavigator = TabNavigator({
   Main: {

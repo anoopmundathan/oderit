@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { fetchStoresAction } from '../actions'
 import { SearchBar, List, ListItem } from 'react-native-elements'
 import { Entypo } from '@expo/vector-icons'
-import StoreList from './StoreList'
-import Loading from './Loading'
+import StoreList from '../components/StoreList'
+import Loading from '../components/Loading'
 import { red } from '../utils/colors'
 
 class Stores extends Component {

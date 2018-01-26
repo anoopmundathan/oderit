@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Location, Permissions, MapView } from 'expo'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { fetchStores } from '../utils/api'
-import Search from './Search'
-import Loading from './Loading'
+import Search from '../components/Search'
+import Loading from '../components/Loading'
 
 class MapScreen extends Component {
 
