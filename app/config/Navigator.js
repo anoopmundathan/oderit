@@ -7,7 +7,7 @@ import { View, Text } from 'react-native'
 import MapScreen from '../screens/MapScreen'
 import Settings from '../screens/Settings'
 import Orders from '../screens/Orders'
-import Stores from '../screens/Stores'
+import StoresScreen from '../screens/StoresScreen'
 import Items from '../screens/Items'
 
 export const MainNavigator = TabNavigator({
@@ -21,7 +21,7 @@ export const MainNavigator = TabNavigator({
         }
       },
       Stores: {
-        screen: Stores,
+        screen: StoresScreen,
         navigationOptions: {
           headerTitle: 'Stores',
           headerTintColor: red

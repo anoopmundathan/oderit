@@ -3,7 +3,7 @@ import { Location, Permissions, MapView } from 'expo'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { fetchStores } from '../utils/api'
 import Search from '../components/Search'
-import Loading from '../components/Loading'
+import { Loading } from '../components/Loading'
 
 class MapScreen extends Component {
 

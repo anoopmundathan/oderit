@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 import { red } from '../utils/colors'
 
-
 class Search extends Component {
 
   render() {

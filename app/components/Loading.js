@@ -5,7 +5,7 @@ import {
   ActivityIndicator, 
   StyleSheet } from 'react-native'
 
-export default Loading = () => {
+export const Loading = () => {
   return(
     <View style={styles.container}>
       <Text style={styles.loading}>Loading...</Text>
