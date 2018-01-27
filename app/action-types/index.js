@@ -1,2 +1,3 @@
 export const FETCH_STORES = 'FETCH_STORES'
-export const FETCH_STORES_ERROR = 'FETCH_STORES_ERROR'
+export const FETCH_ITEMS = 'FETCH_ITEMS'
+export const FETCH_ERROR = 'FETCH_ERROR'

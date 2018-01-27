@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux'
-import { FETCH_STORES, FETCH_STORES_ERROR } from '../action-types'
+import { 
+  FETCH_STORES, 
+  FETCH_ITEMS, 
+  FETCH_ERROR } from '../action-types'
 
 const stores = (state = { }, action) => {
   switch(action.type) {
@@ -10,9 +13,18 @@ const stores = (state = { }, action) => {
   }
 }
 
+const items = (state = { }, action) => {
+  switch(action.type) {
+    case FETCH_ITEMS: 
+      return action.items
+    default: 
+      return state
+  }
+}
+
 const error = (state = { }, action) => {
   switch(action.type) {
-    case FETCH_STORES_ERROR:
+    case FETCH_ERROR:
       return {
         error: action.error
       }
@@ -22,6 +34,7 @@ const error = (state = { }, action) => {
 }
 
 export default combineReducers({
-  stores, 
+  stores,
+  items, 
   error
 })

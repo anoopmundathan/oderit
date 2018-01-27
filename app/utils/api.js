@@ -12,3 +12,15 @@ export const fetchStores = async () => {
     }
   }
 }
+
+export const fetchItems = async (storeId) => {
+  try {
+    const response = await fetch(`${apiUrl}/stores/${storeId}/items`)
+    const data = await response.json()
+    return data 
+  } catch(err) {
+    return {
+      error: 'Network error'
+    }
+  }
+}
