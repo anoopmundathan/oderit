@@ -3,6 +3,11 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 import { black, green } from '../../utils/colors'
 import ItemBasket from './ItemBasket'
+import { connect } from 'react-redux'
+import { 
+  addItemAction, 
+  removeItemAction, 
+  updateItemAction } from '../../actions'
 
 class Item extends Component {
   
@@ -10,17 +15,32 @@ class Item extends Component {
     count: 0
   }
 
-  onRemovePress = () => {
-    this.setState({
-      count: this.state.count - 1
-    })
+  onRemovePress = (id) => {
+    const { count } = this.state
+    console.log(id)
+    
+    if(count === 1) {
+      this.props.removeFromBasket(id)
+    } else {
+      this.props.updateBasket(id, -1)
+    }
+
+    this.setState({ count: count - 1 })
   }
 
-  onAddPress = () => {
-    // dispatch action
-    this.setState({
-      count: this.state.count + 1
-    })
+  onAddPress = (item) => {
+    const { count } = this.state
+    const { _id } = item
+  
+    if(count === 0 ) {
+      // When you add new item, quantity should be 1
+      item.qty = count + 1
+      this.props.addToBasket(item)
+    } else {
+      this.props.updateBasket(_id, 1)
+    }
+
+    this.setState({ count: count + 1 })
   }
 
   render() {
@@ -41,7 +61,7 @@ class Item extends Component {
 
           <View style={{ flex: 1 }}>
             <Button 
-              onPress={this.onAddPress}
+              onPress={() => this.onAddPress(item)}
               backgroundColor={green}
               borderRadius={3}
               title='+' />
@@ -50,6 +70,7 @@ class Item extends Component {
 
         {this.state.count > 0 && (
           <ItemBasket 
+            id={item._id}
             price={item.price * count}
             count={count}
             onPress={this.onRemovePress} />
@@ -60,7 +81,21 @@ class Item extends Component {
   }
 }
 
-export default Item
+mapStateToProps = (state) => {
+  return {
+    basket: state.basket
+  }
+}
+
+mapDispatchToProps = dispatch => {
+  return {
+    addToBasket: (item) => dispatch(addItemAction(item)),
+    updateBasket: (id, value) => dispatch(updateItemAction(id, value)),
+    removeFromBasket: (id) => dispatch(removeItemAction(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item)
 
 const styles = StyleSheet.create({
   itemContainer: {

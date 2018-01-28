@@ -5,15 +5,18 @@ import { red, black } from '../../utils/colors'
 
 class ItemBasket extends Component {
   
+  _onPress = () => {
+    this.props.onPress(this.props.id)
+  }
   render() {
-    const { price, count, onPress } = this.props
+    const { id, price, count } = this.props
 
     return(
       <View style={styles.container}>
 
         <View style={{ flex: .75 }}>
           <Button 
-            onPress={onPress}
+            onPress={this._onPress}
             backgroundColor={red}
             borderRadius={3}
             title='-' />

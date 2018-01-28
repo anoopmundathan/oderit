@@ -2,12 +2,37 @@ import { combineReducers } from 'redux'
 import { 
   FETCH_STORES, 
   FETCH_ITEMS, 
+  ADD_ITEM,
+  UPDATE_ITEM,
+  REMOVE_ITEM,
   FETCH_ERROR } from '../action-types'
 
 const stores = (state = { }, action) => {
   switch(action.type) {
     case FETCH_STORES: 
       return action.stores  
+    default: 
+      return state
+  }
+}
+
+const basket = (state = [], action) => {
+  switch(action.type) {
+    case ADD_ITEM:
+      return [...state, action.item]
+    case UPDATE_ITEM:
+      const updateItem = state.map((item) => {
+        if(item._id === action.id) {
+          return {
+            ...item,
+            qty: item.qty + action.value
+          }
+        }
+        return item
+      })    
+      return updateItem
+    case REMOVE_ITEM:
+      return state.filter(item => item._id !== action.id)
     default: 
       return state
   }
@@ -36,5 +61,6 @@ const error = (state = { }, action) => {
 export default combineReducers({
   stores,
   items, 
+  basket,
   error
 })
