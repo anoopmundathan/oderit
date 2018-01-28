@@ -8,7 +8,7 @@ import MapScreen from '../screens/MapScreen'
 import Settings from '../screens/Settings'
 import Orders from '../screens/Orders'
 import StoresScreen from '../screens/StoresScreen'
-import Items from '../screens/Items'
+import ItemsScreen from '../screens/ItemsScreen'
 
 export const MainNavigator = TabNavigator({
   Main: {
@@ -28,7 +28,7 @@ export const MainNavigator = TabNavigator({
         }
       },
       Items: {
-        screen: Items,
+        screen: ItemsScreen,
         navigationOptions: {
           headerTitle: 'Items',
           headerTintColor: red

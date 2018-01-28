@@ -43,7 +43,7 @@ class StoreList extends Component {
       )
     } else {
       return(
-        <View>
+        <View style={{ flex: 1 }}>
           <FlatList 
             data={stores}
             keyExtractor={(store, index) => store._id}

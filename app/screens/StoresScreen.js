@@ -4,11 +4,11 @@ import { SearchBar } from 'react-native-elements'
 import StoreList from '../components/store'
 import { fetchItemsAction } from '../actions'
 import { connect } from 'react-redux'
+import { red } from '../utils/colors'
 
 class StoresScreen extends Component {
 
   onStorePressed = (storeId) => {
-    // this.props.navigation.navigate('Items')
     this.props.getItems(storeId, () => {
       this.props.navigation.navigate('Items')
     })

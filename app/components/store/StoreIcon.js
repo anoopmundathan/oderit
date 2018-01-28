@@ -9,7 +9,7 @@ export const StoreIcon = () => {
         <Entypo 
           name='shop' 
           color={red} 
-          size={60} />
+          size={80} />
     </View>
   )
 }

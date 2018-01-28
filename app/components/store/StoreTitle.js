@@ -22,12 +22,11 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'flex-start',
     flex: 2,
-    paddingLeft: '5%',
+    paddingLeft: '1%',
     paddingTop: '5%',
   },
   name: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 18,
     color: black
   },
   secondName: {
