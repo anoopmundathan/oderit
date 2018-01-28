@@ -2,24 +2,36 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import ItemsList from '../components/item'
+import Basket from '../components/item/Basket'
+
+import { connect } from 'react-redux'
 
 class ItemsScreen extends Component {
   render() {
+    const { basket } = this.props
+
     return(
       <View style={styles.container}>
         <SearchBar 
           lightTheme 
           placeholder='Search here' />
         <ItemsList />
+        {basket.length > 0 && (<Basket items={basket}/>)}
       </View>
     )
   }
 }
 
-export default ItemsScreen
+const mapStateToProps = (state) => {
+  return {
+    basket: state.basket
+  }
+}
+
+export default connect(mapStateToProps)(ItemsScreen)
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 2
   }
 })
