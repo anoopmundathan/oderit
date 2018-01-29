@@ -7,6 +7,12 @@ import Basket from '../components/item/Basket'
 import { connect } from 'react-redux'
 
 class ItemsScreen extends Component {
+
+  onBasketPressed = () => {
+    console.log('onBasket Clicked')
+    this.props.navigation.navigate('CheckOut')
+  }
+
   render() {
     const { basket } = this.props
 
@@ -16,7 +22,11 @@ class ItemsScreen extends Component {
           lightTheme 
           placeholder='Search here' />
         <ItemsList />
-        {basket.length > 0 && (<Basket items={basket}/>)}
+        {basket.length > 0 && (
+          <Basket 
+            onPress={this.onBasketPressed}
+            items={basket}/>
+          )}
       </View>
     )
   }

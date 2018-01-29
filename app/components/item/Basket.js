@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { red } from '../../utils/colors'
 
 class Basket extends Component {
@@ -9,9 +9,12 @@ class Basket extends Component {
     }, 0)
 
     return(
-      <View style={styles.container}>
-        <Text style={styles.checkout}>Total: INR {total} - CHECKOUT</Text>
-      </View>
+      <TouchableOpacity
+        onPress={this.props.onPress}>
+        <View style={styles.container}>
+          <Text style={styles.checkout}>Total: INR {total} - CHECKOUT</Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 }

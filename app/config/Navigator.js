@@ -9,6 +9,7 @@ import Settings from '../screens/Settings'
 import Orders from '../screens/Orders'
 import StoresScreen from '../screens/StoresScreen'
 import ItemsScreen from '../screens/ItemsScreen'
+import CheckOutScreen from '../screens/CheckOutScreen'
 
 export const MainNavigator = TabNavigator({
   Main: {
@@ -31,6 +32,13 @@ export const MainNavigator = TabNavigator({
         screen: ItemsScreen,
         navigationOptions: {
           headerTitle: 'Items',
+          headerTintColor: red
+        }
+      },
+      CheckOut: {
+        screen: CheckOutScreen,
+        navigationOptions: {
+          headerTitle: 'Checkout',
           headerTintColor: red
         }
       }
