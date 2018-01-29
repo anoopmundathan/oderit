@@ -9,7 +9,6 @@ class Search extends Component {
     return(
       <View style={styles.container}>
         <Button
-          large
           raised
           title="Search"
           fontSize={20}
