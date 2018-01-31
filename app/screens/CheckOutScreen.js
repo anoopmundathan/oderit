@@ -8,7 +8,7 @@ import ItemsHeader from '../components/checkout/ItemsHeader'
 import CheckOutButton from '../components/checkout/CheckOutButton'
 import FBLogin from './FBLogin'
 
-const headers = ['Item', 'Price', 'Qty', 'Total', 'value']
+const headers = ['Item', 'Price', 'Qty', 'Total']
 
 class CheckOutScreen extends Component {
 
@@ -36,7 +36,7 @@ class CheckOutScreen extends Component {
     const listItems = basket.map((item, index) => {
       return(
         <View key={index} style={styles.itemContainer}>
-          <View style={{ flex: 2 }}>
+          <View style={{ flex: 1 }}>
             <Text>{item.name}</Text>
           </View>
           <View style={styles.item}>
