@@ -2,21 +2,17 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { black } from '../../utils/colors'
 
-const ItemsHeader = () => {
+const ItemsHeader = (props) => {  
+  const { headers } = props
   return(
     <View style={styles.container}>
-      <View style={{ flex: 2 }}>
-        <Text style={styles.title}>Item</Text>
-      </View>
-      <View style={{ flex: 1, alignItems: 'flex-end' }}>
-        <Text style={styles.title}>Price</Text>
-      </View>
-      <View style={{ flex: 1, alignItems: 'flex-end' }}>
-        <Text style={styles.title}>Qty</Text>
-      </View>
-      <View style={{ flex: 1, alignItems: 'flex-end' }}>
-        <Text style={styles.title}>Total</Text>
-      </View>
+      {headers.map((header, index) => (
+        <View 
+          key={header} 
+          style={{ flex: 1, alignItems: index === 0 ? 'flex-start' : 'flex-end' }}>
+          <Text style={styles.title}>{header}</Text>
+        </View>)
+      )}
     </View>
   )
 }

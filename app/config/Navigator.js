@@ -41,7 +41,7 @@ export const MainNavigator = TabNavigator({
           headerTitle: 'Checkout',
           headerTintColor: red
         }
-      }
+      },
     }, {
       navigationOptions: {
         title: 'Stores',
