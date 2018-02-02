@@ -29,7 +29,8 @@ const FBLogin = (props) => {
               raised
               borderRadius={3}
               backgroundColor={blue}
-              title='Login with Facebook' />
+              title='Login with Facebook' 
+              onPress={props.onFBLogin} />
           </View>
         </View>
       </Modal>

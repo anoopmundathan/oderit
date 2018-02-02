@@ -5,7 +5,21 @@ import {
   ADD_ITEM,
   UPDATE_ITEM,
   REMOVE_ITEM,
-  FETCH_ERROR } from '../action-types'
+  FETCH_ERROR,
+  FB_LOGIN_SUCCESS,
+  FB_LOGIN_FAIL
+ } from '../action-types'
+
+const auth = (state = { }, action) => {
+  switch(action.type) {
+    case FB_LOGIN_SUCCESS:
+      return { token: action.payload }
+    case FB_LOGIN_FAIL:
+      return { token: null }
+    default: 
+      return state
+  }
+}
 
 const stores = (state = { }, action) => {
   switch(action.type) {
@@ -62,5 +76,6 @@ export default combineReducers({
   stores,
   items, 
   basket,
-  error
+  error,
+  auth
 })

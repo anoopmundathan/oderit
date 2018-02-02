@@ -7,6 +7,7 @@ import Header from '../components/checkout/Header'
 import ItemsHeader from '../components/checkout/ItemsHeader'
 import CheckOutButton from '../components/checkout/CheckOutButton'
 import FBLogin from './FBLogin'
+import { faceBookLogin } from '../actions'
 
 const headers = ['Item', 'Price', 'Qty', 'Total']
 
@@ -21,7 +22,22 @@ class CheckOutScreen extends Component {
   }
 
   onCheckOut = () => {
-    this.setState({ visible: true });
+    if(!this.props.token) {
+      this.setState({ visible: true });
+    } else {
+      this.props.navigation.navigate('Confirmation')
+    }
+  }
+
+  onFBLogin = () => {
+    this.props.facebookLogin()
+  }
+
+  componentWillReceiveProps(props) {
+    if(props.token) {
+      this.setState( { visible: false })
+      this.props.navigation.navigate('Confirmation')
+    }
   }
 
   render() {
@@ -57,6 +73,7 @@ class CheckOutScreen extends Component {
       <ScrollView>
 
         <FBLogin 
+          onFBLogin={this.onFBLogin}
           visible={this.state.visible} 
           onModalClose={this.closeModal} />
 
@@ -85,11 +102,18 @@ class CheckOutScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    basket: state.basket
+    basket: state.basket, 
+    token: state.auth.token
   }
 }
 
-export default connect(mapStateToProps)(CheckOutScreen)
+const mapDispatchToProps = dispatch => {
+  return {
+    facebookLogin: () => dispatch(faceBookLogin())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckOutScreen)
 
 const styles = StyleSheet.create({
   container: {

@@ -11,6 +11,8 @@ import StoresScreen from '../screens/StoresScreen'
 import ItemsScreen from '../screens/ItemsScreen'
 import CheckOutScreen from '../screens/CheckOutScreen'
 
+const ConfirmationScreen = () => <View><Text>Confirm details</Text></View>
+
 export const MainNavigator = TabNavigator({
   Main: {
     screen: StackNavigator({
@@ -42,6 +44,13 @@ export const MainNavigator = TabNavigator({
           headerTintColor: red
         }
       },
+      Confirmation: {
+        screen: ConfirmationScreen,
+        navigationOptions: {
+          headerTitle: 'Confirm Details',
+          headerTintColor: red
+        }
+      }
     }, {
       navigationOptions: {
         title: 'Stores',
