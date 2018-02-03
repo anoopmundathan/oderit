@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ScrollView, Modal, Button } from 'react-native'
+import { 
+  Text, 
+  View, 
+  StyleSheet, 
+  ScrollView, 
+  Modal, 
+  Button,
+  AsyncStorage
+ } from 'react-native'
 import { Overlay } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { red, black } from '../utils/colors'
@@ -8,22 +16,43 @@ import ItemsHeader from '../components/checkout/ItemsHeader'
 import CheckOutButton from '../components/checkout/CheckOutButton'
 import FBLogin from './FBLogin'
 import { faceBookLogin } from '../actions'
+import { STORAGE_KEY } from '../actions'
 
 const headers = ['Item', 'Price', 'Qty', 'Total']
 
 class CheckOutScreen extends Component {
 
   state = {
-    visible: false
+    visible: false,
+    token: null
+  }
+
+  async componentWillMount() {
+    let key = await AsyncStorage.getItem(STORAGE_KEY)
+
+    if (key) {
+      let { token } = JSON.parse(key)  
+      token ? this.setState( { token }) : null
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if(props.token) {
+      this.setState( {
+        token: props.token,
+        visible: false 
+      })
+      this.props.navigation.navigate('Confirmation')
+    }
   }
 
   closeModal = () => {
-    this.setState({ visible: false });
+    this.setState({ visible: false })
   }
 
   onCheckOut = () => {
-    if(!this.props.token) {
-      this.setState({ visible: true });
+    if(!this.state.token) {
+      this.setState({ visible: true })
     } else {
       this.props.navigation.navigate('Confirmation')
     }
@@ -31,13 +60,6 @@ class CheckOutScreen extends Component {
 
   onFBLogin = () => {
     this.props.facebookLogin()
-  }
-
-  componentWillReceiveProps(props) {
-    if(props.token) {
-      this.setState( { visible: false })
-      this.props.navigation.navigate('Confirmation')
-    }
   }
 
   render() {

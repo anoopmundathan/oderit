@@ -12,13 +12,16 @@ import { Facebook } from 'expo'
 import { AsyncStorage } from 'react-native'
 import { fetchStores, fetchItems } from '../utils/api'
 
-export const faceBookLogin = () => async dispatch => {
+export const STORAGE_KEY = 'Oderit:storageKey'
 
-    let token = await AsyncStorage.getItem('fb_token')
-    if(token) {
-      dispatch({ type: FB_LOGIN_SUCCESS, payload: token })
+export const faceBookLogin = () => async dispatch => {
+    let key = await AsyncStorage.getItem(STORAGE_KEY)
+
+    if(key) {
+      let { token, name } = await JSON.parse(key)
+      dispatch({ type: FB_LOGIN_SUCCESS, payload: token, name })
     } else {
-      doFaceBookLogin()
+      doFaceBookLogin(dispatch)
     }
 }
 
@@ -30,8 +33,11 @@ const doFaceBookLogin = async dispatch => {
   if(type === 'cancel') {
     return dispatch({ type: FB_LOGIN_FAIL })
   } else {
-    await AsyncStorage.setItem('fb_token', token)
-    return dispatch( { type: FB_LOGIN_SUCCESS, payload: token })
+    const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`)
+    const data = await response.json()
+    const name = data.name
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ token, name }))
+    return dispatch( { type: FB_LOGIN_SUCCESS, payload: token, name })
   }
 }
 

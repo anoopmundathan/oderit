@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 class ItemsScreen extends Component {
 
   onBasketPressed = () => {
-    console.log('onBasket Clicked')
     this.props.navigation.navigate('CheckOut')
   }
 

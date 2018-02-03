@@ -13,7 +13,10 @@ import {
 const auth = (state = { }, action) => {
   switch(action.type) {
     case FB_LOGIN_SUCCESS:
-      return { token: action.payload }
+      return { 
+        token: action.payload,
+        name: action.name
+      }
     case FB_LOGIN_FAIL:
       return { token: null }
     default: 
