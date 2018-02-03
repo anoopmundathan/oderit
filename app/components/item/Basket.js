@@ -12,7 +12,7 @@ class Basket extends Component {
       <TouchableOpacity
         onPress={this.props.onPress}>
         <View style={styles.container}>
-          <Text style={styles.checkout}>Total: INR {total} - CHECKOUT</Text>
+          <Text style={styles.checkout}>Total: INR {total} - VIEW BASKET</Text>
         </View>
       </TouchableOpacity>
     )
@@ -27,11 +27,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 60,
-    backgroundColor: red
+    backgroundColor: '#379392'
   },
   checkout: {
     fontSize: 18,
-    color: '#fff',
-    fontWeight: 'bold'
+    color: '#fff'
   }
 })

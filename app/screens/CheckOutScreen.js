@@ -29,7 +29,6 @@ class CheckOutScreen extends Component {
 
   async componentWillMount() {
     let key = await AsyncStorage.getItem(STORAGE_KEY)
-
     if (key) {
       let { token } = JSON.parse(key)  
       token ? this.setState( { token }) : null
@@ -103,7 +102,7 @@ class CheckOutScreen extends Component {
           <Header items={totalItems} price={price} />
           <CheckOutButton 
             onCheckOut={this.onCheckOut}
-            title='Confirm checkout'/>
+            title='CHECKOUT'/>
             
           <ItemsHeader headers={headers}/>
 

@@ -63,7 +63,8 @@ class Item extends Component {
             <Button 
               onPress={() => this.onAddPress(item)}
               backgroundColor={green}
-              borderRadius={3}
+              borderRadius={30}
+              fontSize={20}
               title='+' />
           </View>
         </View>

@@ -18,6 +18,7 @@ class ItemBasket extends Component {
           <Button 
             onPress={this._onPress}
             backgroundColor={red}
+            fontSize={20}
             borderRadius={3}
             title='-' />
         </View>
@@ -48,11 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   price: {
-    fontSize: 16,
-    color: '#56A902'
-  },
-  count: {
-
+    fontSize: 16
   }
 })
 

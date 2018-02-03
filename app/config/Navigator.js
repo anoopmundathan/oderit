@@ -10,8 +10,7 @@ import Orders from '../screens/Orders'
 import StoresScreen from '../screens/StoresScreen'
 import ItemsScreen from '../screens/ItemsScreen'
 import CheckOutScreen from '../screens/CheckOutScreen'
-
-const ConfirmationScreen = () => <View><Text>Confirm details</Text></View>
+import Confirmation from '../screens/Confirmation'
 
 export const MainNavigator = TabNavigator({
   Main: {
@@ -40,12 +39,12 @@ export const MainNavigator = TabNavigator({
       CheckOut: {
         screen: CheckOutScreen,
         navigationOptions: {
-          headerTitle: 'Checkout',
+          headerTitle: 'Basket',
           headerTintColor: red
         }
       },
       Confirmation: {
-        screen: ConfirmationScreen,
+        screen: Confirmation,
         navigationOptions: {
           headerTitle: 'Confirm Details',
           headerTintColor: red
