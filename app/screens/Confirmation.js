@@ -4,6 +4,9 @@ import { FormInput, FormLabel, Button } from 'react-native-elements'
 import { STORAGE_KEY } from '../actions'
 import { red } from '../utils/colors'
 
+const PHONE = '9999999999'
+const ADDRESS = 'Address Goes here'
+
 class Confirmation extends Component {
   state = {
     name: ''
@@ -17,9 +20,11 @@ class Confirmation extends Component {
     }
   }
 
+  onPress = () => {
+    this.props.navigation.navigate('Delivery')
+  }
+
   render() {
-    let phone = '989054787'
-    let address = 'Manning Gardens'
     const { name } = this.state
     return(
       <View>
@@ -28,19 +33,19 @@ class Confirmation extends Component {
         <FormInput value={name}></FormInput>
         
         <FormLabel>Phone</FormLabel>
-        <FormInput value={phone}></FormInput>
+        <FormInput value={PHONE}></FormInput>
         
         <FormLabel>Address</FormLabel>
-        <FormInput value={address}></FormInput>
+        <FormInput value={ADDRESS}></FormInput>
 
         <Button
-          onPress={() => console.log('continue payment')}
+          onPress={this.onPress}
           raised
           fontSize={20}
           borderRadius={3}
           backgroundColor={red}
           title='Continue Payment' />
-          
+
       </View>
     )
   }

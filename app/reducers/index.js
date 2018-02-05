@@ -5,6 +5,7 @@ import {
   ADD_ITEM,
   UPDATE_ITEM,
   REMOVE_ITEM,
+  CLEAR_BASKET,
   FETCH_ERROR,
   FB_LOGIN_SUCCESS,
   FB_LOGIN_FAIL
@@ -50,6 +51,8 @@ const basket = (state = [], action) => {
       return updateItem
     case REMOVE_ITEM:
       return state.filter(item => item._id !== action.id)
+    case CLEAR_BASKET:
+      return []
     default: 
       return state
   }

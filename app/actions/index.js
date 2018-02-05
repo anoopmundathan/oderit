@@ -4,6 +4,7 @@ import {
   ADD_ITEM, 
   UPDATE_ITEM,
   REMOVE_ITEM,
+  CLEAR_BASKET,
   FETCH_ERROR,
   FB_LOGIN_SUCCESS,
   FB_LOGIN_FAIL
@@ -30,8 +31,6 @@ const doFaceBookLogin = async dispatch => {
   let { type, token } = await Facebook.logInWithReadPermissionsAsync('134228010721869', {
     permissions: ['public_profile']
   })
-
-  debugger
 
   if(type === 'cancel') {
     return dispatch({ type: FB_LOGIN_FAIL })
@@ -86,3 +85,10 @@ export const removeItemAction = id => {
     id
   }
 }
+
+export const clearBasket = () => {
+  return {
+    type: CLEAR_BASKET
+  }
+}
+

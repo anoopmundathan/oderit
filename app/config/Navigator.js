@@ -11,6 +11,7 @@ import StoresScreen from '../screens/StoresScreen'
 import ItemsScreen from '../screens/ItemsScreen'
 import CheckOutScreen from '../screens/CheckOutScreen'
 import Confirmation from '../screens/Confirmation'
+import Delivery from '../screens/DeliveryMethod'
 
 export const MainNavigator = TabNavigator({
   Main: {
@@ -47,6 +48,13 @@ export const MainNavigator = TabNavigator({
         screen: Confirmation,
         navigationOptions: {
           headerTitle: 'Confirm Details',
+          headerTintColor: red
+        }
+      },
+      Delivery: {
+        screen: Delivery,
+        navigationOptions: {
+          headerTitle: 'Payment',
           headerTintColor: red
         }
       }
