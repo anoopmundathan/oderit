@@ -5,7 +5,7 @@ import { red } from '../utils/colors'
 import FinalScreen from './FinalScreen'
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux'
-import { clearBasket } from '../actions'
+import { clearBasket, orderConfirmation } from '../actions'
 
 class DeliveryMethod extends Component {
 
@@ -13,8 +13,9 @@ class DeliveryMethod extends Component {
     checked: true,
     ordered: false
   }
-
+  
   onPress = () => {
+    this.props.sendConfirmation({ basket: 'basket', phone: 11111 })
     this.setState({ ordered: true })
   }
 
@@ -30,7 +31,6 @@ class DeliveryMethod extends Component {
   }
 
   render() {    
-    console.log('Delivery ', this.props)
     return(
       <View style={{ flex: 1 }}>
         <View>
@@ -73,10 +73,17 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    emptyBasket: () => dispatch(clearBasket())
+const mapStateToProps = ({ basket }) => {
+  return { 
+    basket
   }
 }
-export default connect(null, mapDispatchToProps)(DeliveryMethod)
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    emptyBasket: () => dispatch(clearBasket()),
+    sendConfirmation: (data) => dispatch(orderConfirmation(data))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(DeliveryMethod)
 

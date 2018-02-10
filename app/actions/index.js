@@ -7,11 +7,14 @@ import {
   CLEAR_BASKET,
   FETCH_ERROR,
   FB_LOGIN_SUCCESS,
-  FB_LOGIN_FAIL
+  FB_LOGIN_FAIL,
+  ORDER_CONFIRMATION
 } from '../action-types'
+
 import { Facebook } from 'expo'
 import { AsyncStorage } from 'react-native'
 import { fetchStores, fetchItems, fetchFacebookInfo } from '../utils/api'
+import { letStoreOwnerKnowAboutOrder } from '../utils/cloud-func'
 
 export const STORAGE_KEY = 'Oderit:storageKey'
 
@@ -92,3 +95,12 @@ export const clearBasket = () => {
   }
 }
 
+export function orderConfirmation(data) {
+
+  return async function() {
+    const response = await letStoreOwnerKnowAboutOrder(data)
+    console.log('oderConfirmation', response);
+    dispatch( { type: ORDER_CONFIRMATION })
+  }
+
+}
