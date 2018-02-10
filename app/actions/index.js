@@ -99,7 +99,7 @@ export function orderConfirmation(data) {
 
   return async function() {
     const response = await letStoreOwnerKnowAboutOrder(data)
-    console.log('oderConfirmation', response);
+    console.log('oderConfirmation', response)
     dispatch( { type: ORDER_CONFIRMATION })
   }
 

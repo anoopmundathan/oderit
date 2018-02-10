@@ -6,6 +6,7 @@ import FinalScreen from './FinalScreen'
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux'
 import { clearBasket, orderConfirmation } from '../actions'
+import phone from '../config/data.json'
 
 class DeliveryMethod extends Component {
 
@@ -13,9 +14,10 @@ class DeliveryMethod extends Component {
     checked: true,
     ordered: false
   }
-  
+
   onPress = () => {
-    this.props.sendConfirmation({ basket: 'basket', phone: 11111 })
+    const { basket } = this.props
+    this.props.sendConfirmation({ basket: basket, phone: phone.phone })
     this.setState({ ordered: true })
   }
 
