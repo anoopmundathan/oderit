@@ -6,43 +6,11 @@ import {
   REMOVE_ITEM,
   CLEAR_BASKET,
   FETCH_ERROR,
-  FB_LOGIN_SUCCESS,
-  FB_LOGIN_FAIL,
   ORDER_CONFIRMATION
 } from '../action-types'
 
-import { Facebook } from 'expo'
-import { AsyncStorage } from 'react-native'
-import { fetchStores, fetchItems, fetchFacebookInfo } from '../utils/api'
+import { fetchStores, fetchItems } from '../utils/api'
 import { letStoreOwnerKnowAboutOrder } from '../utils/cloud-func'
-
-export const STORAGE_KEY = 'Oderit:storageKey'
-
-export const faceBookLogin = () => async dispatch => {
-    let key = await AsyncStorage.getItem(STORAGE_KEY)
-
-    if(key) {
-      let { token, name } = await JSON.parse(key)
-      dispatch({ type: FB_LOGIN_SUCCESS, payload: token, name })
-    } else {
-      doFaceBookLogin(dispatch)
-    }
-}
-
-const doFaceBookLogin = async dispatch => {
-  debugger
-  let { type, token } = await Facebook.logInWithReadPermissionsAsync('134228010721869', {
-    permissions: ['public_profile']
-  })
-
-  if(type === 'cancel') {
-    return dispatch({ type: FB_LOGIN_FAIL })
-  } else {
-    const { name } = await fetchFacebookInfo(token)
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ token, name }))
-    return dispatch( { type: FB_LOGIN_SUCCESS, payload: token, name })
-  }
-}
 
 export const fetchStoresAction = () => async dispatch => {
   const stores = await fetchStores()
@@ -96,11 +64,8 @@ export const clearBasket = () => {
 }
 
 export function orderConfirmation(data) {
-
   return async function() {
     const response = await letStoreOwnerKnowAboutOrder(data)
-    console.log('oderConfirmation', response)
     dispatch( { type: ORDER_CONFIRMATION })
   }
-
 }

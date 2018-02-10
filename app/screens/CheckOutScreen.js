@@ -15,8 +15,7 @@ import Header from '../components/checkout/Header'
 import ItemsHeader from '../components/checkout/ItemsHeader'
 import CheckOutButton from '../components/checkout/CheckOutButton'
 import FBLogin from './FBLogin'
-import { faceBookLogin } from '../actions'
-import { STORAGE_KEY } from '../actions'
+import { faceBookLogin, STORAGE_KEY } from '../actions/fb_action'
 
 const headers = ['Item', 'Price', 'Qty', 'Total']
 
