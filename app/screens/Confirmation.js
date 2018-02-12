@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, AsyncStorage } from 'react-native'
 import { FormInput, FormLabel, Button } from 'react-native-elements'
-import { STORAGE_KEY } from '../actions'
+import { STORAGE_KEY } from '../actions/fb_action'
 import { red } from '../utils/colors'
 
 const PHONE = '9999999999'

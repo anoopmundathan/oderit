@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Modal } from 'react-native'
+import { View, Text, StyleSheet, Modal, AsyncStorage } from 'react-native'
 import { Button, CheckBox } from 'react-native-elements'
 import { red } from '../utils/colors'
 import FinalScreen from './FinalScreen'
@@ -7,6 +7,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux'
 import { clearBasket, orderConfirmation } from '../actions'
 import phone from '../config/data.json'
+import {  STORAGE_KEY } from '../actions/fb_action'
 
 class DeliveryMethod extends Component {
 
@@ -15,9 +16,16 @@ class DeliveryMethod extends Component {
     ordered: false
   }
 
-  onPress = () => {
+  onPress = async () => {
     const { basket } = this.props
-    this.props.sendConfirmation({ basket: basket, phone: phone.phone })
+    const key = await AsyncStorage.getItem(STORAGE_KEY)
+    const { name } = JSON.parse(key)  
+    this.props.sendConfirmation({ 
+      basket, 
+      phone: phone.phone,
+      from: name
+    })
+
     this.setState({ ordered: true })
   }
 

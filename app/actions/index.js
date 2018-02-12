@@ -63,9 +63,7 @@ export const clearBasket = () => {
   }
 }
 
-export function orderConfirmation(data) {
-  return async function() {
-    const response = await letStoreOwnerKnowAboutOrder(data)
-    dispatch( { type: ORDER_CONFIRMATION })
-  }
+export const orderConfirmation = (data) => async () => {
+  const response = await letStoreOwnerKnowAboutOrder(data)
+  dispatch( { type: ORDER_CONFIRMATION })
 }
