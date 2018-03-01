@@ -25,10 +25,10 @@ const auth = (state = { }, action) => {
   }
 }
 
-const stores = (state = { }, action) => {
+const stores = (state = {}, action) => {
   switch(action.type) {
     case FETCH_STORES: 
-      return action.stores  
+      return action.stores
     default: 
       return state
   }

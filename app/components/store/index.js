@@ -36,7 +36,7 @@ class StoreList extends Component {
 
   render() {
     const { stores } = this.props
-
+    
     if(!this.state.loaded) {
       return(
         <Loading />

@@ -11,15 +11,34 @@ import {
 
 import { fetchStores, fetchItems } from '../utils/api'
 import { letStoreOwnerKnowAboutOrder } from '../utils/cloud-func'
+import firebase from 'firebase'
 
 export const fetchStoresAction = () => async dispatch => {
-  const stores = await fetchStores()
-  const { error } = stores
-  if(error) {
-    dispatch({ type: FETCH_ERROR, error })
-  } else {
-    dispatch({ type: FETCH_STORES, stores })
-  }
+
+  // Fetch store information from firebase
+  firebase.database().ref().child('users')
+  .on('value', snapshot => {
+    const snap = snapshot.val()
+
+    const storesArray = []
+
+    Object.keys(snap).map(user => {  
+      Object.keys(snap[user].stores).map(store => {
+        storesArray.push({
+          _id: store,
+          storeName: snap[user].stores[store].name,
+          mobile: snap[user].stores[store].mobile,
+          address: snap[user].stores[store].address,
+        })
+      })
+    })
+    
+    if(storesArray.length > 0) {
+      dispatch({ type: FETCH_STORES , stores: storesArray })
+    } else {
+      dispatch({ type: FETCH_ERROR , error: 'No stores are found' })
+    }
+  })
 }
 
 export const fetchItemsAction = (storeId, fn) => async dispatch => {
