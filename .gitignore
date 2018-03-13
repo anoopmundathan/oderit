@@ -5,6 +5,7 @@
 
 # dependencies
 /node_modules
+/app/config/index.js
 
 /app/config/data.json
 
