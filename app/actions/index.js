@@ -49,7 +49,7 @@ export const fetchStoresAction = () => async dispatch => {
 }
 
 export const fetchItemsAction = (store) => async dispatch => {
-  
+
   try {
     firebase.database().ref().child(`users/${store.user}/items`)
     .on('value', snapshot => {
@@ -106,7 +106,7 @@ export const clearBasket = () => {
   }
 }
 
-export const orderConfirmation = (data) => async () => {
+export const orderConfirmation = (data) => async dispatch => {
   const response = await letStoreOwnerKnowAboutOrder(data)
   dispatch( { type: ORDER_CONFIRMATION })
 }

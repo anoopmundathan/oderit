@@ -6,7 +6,6 @@ import FinalScreen from './FinalScreen'
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux'
 import { clearBasket, orderConfirmation } from '../actions'
-import phone from '../config/data.json'
 import {  STORAGE_KEY } from '../actions/fb_action'
 
 class DeliveryMethod extends Component {
@@ -17,12 +16,12 @@ class DeliveryMethod extends Component {
   }
 
   onPress = async () => {
-    const { basket } = this.props
+    const { basket, selectedStore } = this.props
     const key = await AsyncStorage.getItem(STORAGE_KEY)
     const { name } = JSON.parse(key)  
     this.props.sendConfirmation({ 
       basket, 
-      phone: phone.phone,
+      phone: selectedStore.store.mobile,
       from: name
     })
 
@@ -83,18 +82,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = ({ basket, selectedStore }) => {
-  return { 
-    basket,
-    selectedStore
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    emptyBasket: () => dispatch(clearBasket()),
-    sendConfirmation: (data) => dispatch(orderConfirmation(data))
-  }
-}
+const mapStateToProps = ({ basket, selectedStore }) => ({ basket, selectedStore })
+const mapDispatchToProps = dispatch => ({
+  emptyBasket: () => dispatch(clearBasket()),
+  sendConfirmation: (data) => dispatch(orderConfirmation(data))
+})
 export default connect(mapStateToProps, mapDispatchToProps)(DeliveryMethod)
-
