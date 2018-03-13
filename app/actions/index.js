@@ -47,7 +47,7 @@ export const fetchStoresAction = () => async dispatch => {
 
 }
 
-export const fetchItemsAction = (userId, fn) => async dispatch => {
+export const fetchItemsAction = (userId) => async dispatch => {
   
   try {
     firebase.database().ref().child(`users/${userId}/items`)
@@ -68,12 +68,10 @@ export const fetchItemsAction = (userId, fn) => async dispatch => {
       } else {
         dispatch({ type: FETCH_ITEMS, items: null })
       }
-      fn();
     })
   } catch(error) {
     dispatch({ type: FETCH_ERROR, error })
   }
-
 }
 
 export const addItemAction = item => {

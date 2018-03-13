@@ -9,9 +9,8 @@ import { red } from '../utils/colors'
 class StoresScreen extends Component {
 
   onStorePressed = (userId) => {
-    this.props.getItems(userId, () => {
-      this.props.navigation.navigate('Items')
-    })
+    this.props.getItems(userId)
+    this.props.navigation.navigate('Items')
   }
 
   render() {
@@ -29,7 +28,7 @@ class StoresScreen extends Component {
 }
 
 mapDispatchToProps = dispatch => ({ 
-  getItems: (storeId, fn) => dispatch(fetchItemsAction(storeId, fn)) 
+  getItems: (userId) => dispatch(fetchItemsAction(userId)) 
 })
 
 export default connect(null, mapDispatchToProps)(StoresScreen)
