@@ -26,7 +26,7 @@ class StoreList extends Component {
 
   renderStore = ({ item }) => (
     <TouchableOpacity 
-      onPress={() => this.props.onPress(item._id)}>
+      onPress={() => this.props.onPress(item.user)}>
       <View style={styles.storeContainer}>
         <StoreIcon />
         <StoreTitle item={item} />

@@ -8,8 +8,8 @@ import { red } from '../utils/colors'
 
 class StoresScreen extends Component {
 
-  onStorePressed = (storeId) => {
-    this.props.getItems(storeId, () => {
+  onStorePressed = (userId) => {
+    this.props.getItems(userId, () => {
       this.props.navigation.navigate('Items')
     })
   }

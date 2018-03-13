@@ -58,9 +58,9 @@ const basket = (state = [], action) => {
   }
 }
 
-const items = (state = { }, action) => {
+const items = (state = {}, action) => {
   switch(action.type) {
-    case FETCH_ITEMS: 
+    case FETCH_ITEMS:
       return action.items
     default: 
       return state

@@ -16,42 +16,64 @@ import firebase from 'firebase'
 export const fetchStoresAction = () => async dispatch => {
 
   // Fetch store information from firebase
-  firebase.database().ref().child('users')
-  .on('value', snapshot => {
-    const snap = snapshot.val()
+  try {
+    firebase.database().ref().child('users')
+    .on('value', snapshot => {
 
-    const storesArray = []
+      const snap = snapshot.val()
+      const storesArray = []
 
-    Object.keys(snap).map(user => {  
-      Object.keys(snap[user].stores).map(store => {
-        storesArray.push({
-          _id: store,
-          storeName: snap[user].stores[store].name,
-          mobile: snap[user].stores[store].mobile,
-          address: snap[user].stores[store].address,
+      if (snap) {
+        Object.keys(snap).map(user => {  
+          Object.keys(snap[user].stores).map(store => {
+            storesArray.push({
+              _id: store,
+              user,
+              storeName: snap[user].stores[store].name,
+              mobile: snap[user].stores[store].mobile,
+              address: snap[user].stores[store].address,
+            })
+          })
         })
-      })
+        dispatch({ type: FETCH_STORES , stores: storesArray })
+      } else {
+        dispatch({ type: FETCH_ERROR , error: 'No stores found' })
+      }
     })
-    
-    if(storesArray.length > 0) {
-      dispatch({ type: FETCH_STORES , stores: storesArray })
-    } else {
-      dispatch({ type: FETCH_ERROR , error: 'No stores are found' })
-    }
-  })
+  }
+  catch(err) {
+    console.log(err)
+  }
+
 }
 
-export const fetchItemsAction = (storeId, fn) => async dispatch => {
+export const fetchItemsAction = (userId, fn) => async dispatch => {
   
-  const items = await fetchItems(storeId)
-  const { error } = items
-  
-  if(error) {
+  try {
+    firebase.database().ref().child(`users/${userId}/items`)
+    .on('value', snapshot => {
+
+      const snap = snapshot.val()
+      const itemsArray = []
+
+      if (snap) {
+        Object.keys(snap).map(item => {
+          itemsArray.push({
+            _id: item,
+            name: snap[item].name,
+            price: snap[item].price
+          })
+        })
+        dispatch({ type: FETCH_ITEMS, items: itemsArray })
+      } else {
+        dispatch({ type: FETCH_ITEMS, items: null })
+      }
+      fn();
+    })
+  } catch(error) {
     dispatch({ type: FETCH_ERROR, error })
-  } else {
-    dispatch({ type: FETCH_ITEMS, items })
-    fn();
   }
+
 }
 
 export const addItemAction = item => {
