@@ -69,10 +69,10 @@ const items = (state = {}, action) => {
 }
 
 const selectedStore = (state = {}, action) => {
-  const { user } = action
+  const { store } = action
   switch(action.type) {
     case SELECT_STORE:
-      return { user }
+      return { store }
     default: 
       return state
   }

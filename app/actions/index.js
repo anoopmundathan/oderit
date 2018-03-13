@@ -48,10 +48,10 @@ export const fetchStoresAction = () => async dispatch => {
 
 }
 
-export const fetchItemsAction = (userId) => async dispatch => {
+export const fetchItemsAction = (store) => async dispatch => {
   
   try {
-    firebase.database().ref().child(`users/${userId}/items`)
+    firebase.database().ref().child(`users/${store.user}/items`)
     .on('value', snapshot => {
 
       const snap = snapshot.val()
@@ -70,7 +70,7 @@ export const fetchItemsAction = (userId) => async dispatch => {
         dispatch({ type: FETCH_ITEMS, items: null })
       }
 
-      dispatch({ type: SELECT_STORE, user: userId })
+      dispatch({ type: SELECT_STORE, store })
       
     })
   } catch(error) {

@@ -83,9 +83,10 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = ({ basket }) => {
+const mapStateToProps = ({ basket, selectedStore }) => {
   return { 
-    basket
+    basket,
+    selectedStore
   }
 }
 
