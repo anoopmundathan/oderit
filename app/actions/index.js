@@ -10,7 +10,6 @@ import {
   ORDER_CONFIRMATION
 } from '../action-types'
 
-import { fetchStores, fetchItems } from '../utils/api'
 import { letStoreOwnerKnowAboutOrder } from '../utils/cloud-func'
 import firebase from 'firebase'
 
@@ -106,7 +105,6 @@ export const clearBasket = () => {
   }
 }
 
-export const orderConfirmation = (data) => async dispatch => {
-  const response = await letStoreOwnerKnowAboutOrder(data)
-  dispatch( { type: ORDER_CONFIRMATION })
+export const orderConfirmation = async data => {
+  await letStoreOwnerKnowAboutOrder(data)
 }

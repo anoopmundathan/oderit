@@ -83,8 +83,10 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = ({ basket, selectedStore }) => ({ basket, selectedStore })
+
 const mapDispatchToProps = dispatch => ({
   emptyBasket: () => dispatch(clearBasket()),
-  sendConfirmation: (data) => dispatch(orderConfirmation(data))
+  sendConfirmation: data => orderConfirmation(data)
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(DeliveryMethod)
