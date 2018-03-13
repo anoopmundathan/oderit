@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { 
+  SELECT_STORE,
   FETCH_STORES, 
   FETCH_ITEMS, 
   ADD_ITEM,
@@ -67,6 +68,16 @@ const items = (state = {}, action) => {
   }
 }
 
+const selectedStore = (state = {}, action) => {
+  const { user } = action
+  switch(action.type) {
+    case SELECT_STORE:
+      return { user }
+    default: 
+      return state
+  }
+}
+
 const error = (state = { }, action) => {
   switch(action.type) {
     case FETCH_ERROR:
@@ -79,6 +90,7 @@ const error = (state = { }, action) => {
 }
 
 export default combineReducers({
+  selectedStore,
   stores,
   items, 
   basket,

@@ -17,7 +17,6 @@ class Item extends Component {
 
   onRemovePress = (id) => {
     const { count } = this.state
-    console.log(id)
     
     if(count === 1) {
       this.props.removeFromBasket(id)

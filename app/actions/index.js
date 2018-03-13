@@ -1,4 +1,5 @@
 import { 
+  SELECT_STORE,
   FETCH_STORES, 
   FETCH_ITEMS,
   ADD_ITEM, 
@@ -68,6 +69,9 @@ export const fetchItemsAction = (userId) => async dispatch => {
       } else {
         dispatch({ type: FETCH_ITEMS, items: null })
       }
+
+      dispatch({ type: SELECT_STORE, user: userId })
+      
     })
   } catch(error) {
     dispatch({ type: FETCH_ERROR, error })
