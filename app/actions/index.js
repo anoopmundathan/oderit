@@ -6,8 +6,7 @@ import {
   UPDATE_ITEM,
   REMOVE_ITEM,
   CLEAR_BASKET,
-  FETCH_ERROR,
-  ORDER_CONFIRMATION
+  FETCH_ERROR
 } from '../action-types'
 
 import { letStoreOwnerKnowAboutOrder } from '../utils/cloud-func'
