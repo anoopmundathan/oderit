@@ -1,28 +1,9 @@
 import React, { Component } from 'react'
-import { 
-  View, 
-  StyleSheet, 
-  FlatList, 
-  TouchableOpacity } from 'react-native'
-import { connect } from 'react-redux'
-import { fetchStoresAction } from '../../actions'
-
-import { Loading } from '../Loading'
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import { StoreIcon } from './StoreIcon'
 import { StoreTitle } from './StoreTitle'
 
 class StoreList extends Component {
-  
-  state = {
-    loaded: false
-  }
-
-  componentDidMount() {
-    this.props.getStores()
-      .then(() => {
-        this.setState({ loaded: true })
-      })
-  }
 
   renderStore = ({ item }) => (
     <TouchableOpacity 
@@ -36,12 +17,6 @@ class StoreList extends Component {
 
   render() {
     const { stores } = this.props
-    
-    if(!this.state.loaded) {
-      return(
-        <Loading />
-      )
-    } else {
       return(
         <View style={{ flex: 1 }}>
           <FlatList 
@@ -50,16 +25,10 @@ class StoreList extends Component {
             renderItem={this.renderStore} />
         </View>
       )
-    }
-
   }
 }
 
-mapStateToProps = state => ({ stores: state.stores, error: state.error })
-
-mapDispatchToProps = dispatch => ({ getStores: () => dispatch(fetchStoresAction()) })
-
-export default connect(mapStateToProps, mapDispatchToProps)(StoreList)
+export default StoreList
 
 const styles = StyleSheet.create({
   storeContainer: {

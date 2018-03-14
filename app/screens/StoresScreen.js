@@ -1,40 +1,52 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, Text } from 'react-native'
+import { Loading } from '../components/Loading'
 import { SearchBar } from 'react-native-elements'
 import StoreList from '../components/store'
-import { fetchItemsAction } from '../actions'
+import { fetchStoresAction, fetchItemsAction } from '../actions'
 import { connect } from 'react-redux'
-import { red } from '../utils/colors'
 
 class StoresScreen extends Component {
+
+  // Fetch stores data from firebase to redux store
+  componentDidMount() {
+    this.props.getStores()
+  }
 
   onStorePressed = (store) => {
     this.props.getItems(store)
     this.props.navigation.navigate('Items')
   }
 
-  render() {
+  renderStores = () => {
+    const { stores } = this.props
     return(
-      <View style={styles.container}>
-        <SearchBar 
-          lightTheme 
-          placeholder='Search here' />
-        <StoreList 
-          onPress={this.onStorePressed} />
+      <View style={{ flex: 1 }}>
+        <SearchBar lightTheme placeholder='Search here' />
+        <StoreList stores={stores} onPress={this.onStorePressed} />
+      </View>
+    )
+  }
+  
+  render() {
+    const { loading, stores } = this.props
+    return(
+      <View style={{ flex: 1 }}>
+        {loading ? (<Loading />) : this.renderStores()}
       </View>
     )
   }
 
 }
 
-mapDispatchToProps = dispatch => ({ 
-  getItems: (store) => dispatch(fetchItemsAction(store)) 
+const mapStateToProps = ({ stores }) => ({ 
+  stores: stores.stores, 
+  loading: stores.loading 
 })
 
-export default connect(null, mapDispatchToProps)(StoresScreen)
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
+const mapDispatchToProps = dispatch => ({ 
+  getStores: () => dispatch(fetchStoresAction()),
+  getItems: store => dispatch(fetchItemsAction(store))
 })
+
+export default connect(mapStateToProps, mapDispatchToProps)(StoresScreen)

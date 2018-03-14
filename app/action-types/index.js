@@ -1,4 +1,5 @@
 export const FETCH_STORES = 'FETCH_STORES'
+export const FETCH_STORES_START = 'FETCH_STORES_START'
 export const FETCH_ITEMS = 'FETCH_ITEMS'
 export const SELECT_STORE = 'SELECT_STORE'
 export const ADD_ITEM = 'ADD_ITEM'

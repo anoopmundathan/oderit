@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { 
   SELECT_STORE,
   FETCH_STORES, 
+  FETCH_STORES_START, 
   FETCH_ITEMS, 
   ADD_ITEM,
   UPDATE_ITEM,
@@ -26,10 +27,24 @@ const auth = (state = { }, action) => {
   }
 }
 
-const stores = (state = {}, action) => {
+const INITIAL_STORE_STATE = {
+  loading: null,
+  stores: []
+}
+
+const stores = (state = INITIAL_STORE_STATE, action) => {
   switch(action.type) {
+    case FETCH_STORES_START: 
+      return {
+        ...state,
+        loading: true
+      }
     case FETCH_STORES: 
-      return action.stores
+      return { 
+        ...state,
+        stores: action.stores,
+        loading: false
+      }
     default: 
       return state
   }

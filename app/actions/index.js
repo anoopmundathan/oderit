@@ -1,6 +1,7 @@
 import { 
   SELECT_STORE,
   FETCH_STORES, 
+  FETCH_STORES_START,
   FETCH_ITEMS,
   ADD_ITEM, 
   UPDATE_ITEM,
@@ -15,6 +16,7 @@ import firebase from 'firebase'
 export const fetchStoresAction = () => async dispatch => {
 
   // Fetch store information from firebase
+  dispatch({ type: FETCH_STORES_START })
   try {
     firebase.database().ref().child('users')
     .on('value', snapshot => {
